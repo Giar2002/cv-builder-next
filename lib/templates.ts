@@ -1,0 +1,59 @@
+import { TemplateCategory, TemplateConfig } from '@/types/cv';
+
+export const TEMPLATES: TemplateConfig[] = [
+    // General
+    { id: 'modern', name: 'Modern', category: 'general', atsScore: 3, popular: true },
+    { id: 'classic', name: 'Klasik', category: 'general', atsScore: 4, popular: true },
+    { id: 'minimalist', name: 'Minimalis', category: 'general', atsScore: 5 },
+    { id: 'elegant', name: 'Elegan', category: 'general', atsScore: 3 },
+    { id: 'skills-first', name: 'Skills First', category: 'general', atsScore: 4, popular: true },
+    { id: 'bold-header', name: 'Bold Header', category: 'general', atsScore: 4, popular: true },
+    { id: 'hybrid', name: 'Hybrid', category: 'general', atsScore: 4, popular: true },
+    // ATS
+    { id: 'ats', name: 'ATS Friendly', category: 'ats', atsScore: 5, badge: 'ATS' },
+    { id: 'compact', name: 'Compact', category: 'ats', atsScore: 5 },
+    { id: 'ats-clean', name: 'ATS Clean', category: 'ats', atsScore: 5, badge: '⭐⭐⭐⭐⭐' },
+    { id: 'ats-structured', name: 'ATS Structured', category: 'ats', atsScore: 5, badge: '⭐⭐⭐⭐⭐' },
+    { id: 'ats-corporate', name: 'ATS Corporate', category: 'ats', atsScore: 5, badge: '⭐⭐⭐⭐⭐' },
+    // Creative
+    { id: 'creative', name: 'Creative', category: 'creative', atsScore: 2 },
+    { id: 'infographic', name: 'Infographic', category: 'creative', atsScore: 1 },
+    { id: 'portfolio', name: 'Portfolio', category: 'creative', atsScore: 2 },
+    { id: 'designer', name: 'Designer', category: 'creative', atsScore: 2 },
+    { id: 'monogram', name: 'Monogram', category: 'creative', atsScore: 2 },
+    // Professional
+    { id: 'executive', name: 'Executive', category: 'professional', atsScore: 4 },
+    { id: 'banking', name: 'Banking', category: 'professional', atsScore: 4 },
+    { id: 'consulting', name: 'Consulting', category: 'professional', atsScore: 4 },
+    { id: 'law', name: 'Law Firm', category: 'professional', atsScore: 5, badge: '⭐⭐⭐⭐⭐' },
+    // Industry
+    { id: 'tech', name: 'Tech', category: 'industry', atsScore: 3 },
+    { id: 'academic', name: 'Academic', category: 'industry', atsScore: 4 },
+    { id: 'startup', name: 'Startup', category: 'industry', atsScore: 3 },
+    { id: 'healthcare', name: 'Healthcare', category: 'industry', atsScore: 4 },
+    { id: 'engineering', name: 'Engineering', category: 'industry', atsScore: 4 },
+    // Layout
+    { id: 'two-column', name: 'Two Column', category: 'layout', atsScore: 3 },
+    { id: 'timeline', name: 'Timeline', category: 'layout', atsScore: 3 },
+    { id: 'magazine', name: 'Magazine', category: 'layout', atsScore: 2 },
+    { id: 'sidebar-dark', name: 'Sidebar Dark', category: 'layout', atsScore: 2 },
+];
+
+export const TEMPLATE_CATEGORIES: Record<TemplateCategory, { name: string; icon: string; desc?: string }> = {
+    all: { name: 'Semua Template', icon: '📋' },
+    ats: { name: 'ATS-Friendly', icon: '✅', desc: 'Optimized untuk ATS systems' },
+    general: { name: 'General', icon: '📄', desc: 'Cocok untuk semua profesi' },
+    creative: { name: 'Creative', icon: '🎨', desc: 'Design kreatif dan visual' },
+    professional: { name: 'Professional', icon: '👔', desc: 'Formal dan eksekutif' },
+    industry: { name: 'Industry', icon: '🏭', desc: 'Spesifik untuk industri tertentu' },
+    layout: { name: 'Layout Variants', icon: '📐', desc: 'Variasi layout unik' },
+};
+
+export function getTemplateById(id: string): TemplateConfig | undefined {
+    return TEMPLATES.find(t => t.id === id);
+}
+
+export function getTemplatesByCategory(category: TemplateCategory): TemplateConfig[] {
+    if (category === 'all') return TEMPLATES;
+    return TEMPLATES.filter(t => t.category === category);
+}

@@ -1,0 +1,113 @@
+import { TemplateProps, nl2br, ContactInfo, SkillDots } from './shared';
+
+export default function ClassicTemplate({ data }: TemplateProps) {
+    const { personal, experience, education, skills, projects, certifications, languages, settings } = data;
+    const show = settings.showPhoto;
+
+    return (
+        <>
+            <div className="cv-header">
+                {show && personal.photo && (
+                    <div id="cvPhotoContainer">
+                        <img src={personal.photo} className="cv-photo" alt="Foto Profil" />
+                    </div>
+                )}
+                <div>
+                    <div className="cv-name">{personal.fullName || 'Nama Lengkap Anda'}</div>
+                    <div className="cv-title">{personal.jobTitle || 'Jabatan / Profesi'}</div>
+                    <ContactInfo personal={personal} />
+                </div>
+            </div>
+            <div className="cv-body">
+                {personal.summary && personal.summary.trim() && (
+                    <div className="cv-section">
+                        <div className="cv-section-title">Profil</div>
+                        <div className="cv-summary">{personal.summary}</div>
+                    </div>
+                )}
+                {experience.length > 0 && (
+                    <div className="cv-section">
+                        <div className="cv-section-title">Pengalaman Kerja</div>
+                        {experience.map(exp => (
+                            <div key={exp.id} className="cv-entry">
+                                <div className="cv-entry-header">
+                                    <span className="cv-entry-title">{exp.title || 'Posisi'}</span>
+                                    <span className="cv-entry-date">{exp.startDate}{exp.startDate && exp.endDate ? ' — ' : ''}{exp.endDate}</span>
+                                </div>
+                                {exp.company && <div className="cv-entry-subtitle">{exp.company}</div>}
+                                {exp.description && <div className="cv-entry-desc">{nl2br(exp.description)}</div>}
+                            </div>
+                        ))}
+                    </div>
+                )}
+                {education.length > 0 && (
+                    <div className="cv-section">
+                        <div className="cv-section-title">Pendidikan</div>
+                        {education.map(edu => (
+                            <div key={edu.id} className="cv-entry">
+                                <div className="cv-entry-header">
+                                    <span className="cv-entry-title">{edu.school || 'Institusi'}</span>
+                                    <span className="cv-entry-date">{edu.startDate}{edu.startDate && edu.endDate ? ' — ' : ''}{edu.endDate}</span>
+                                </div>
+                                {edu.degree && <div className="cv-entry-subtitle">{edu.degree}</div>}
+                                {edu.description && <div className="cv-entry-desc">{nl2br(edu.description)}</div>}
+                            </div>
+                        ))}
+                    </div>
+                )}
+                {skills.length > 0 && (
+                    <div className="cv-section">
+                        <div className="cv-section-title">Keahlian</div>
+                        <div className="cv-skills-grid">
+                            {skills.map(skill => (
+                                <SkillDots key={skill.id} name={skill.name || 'Skill'} level={skill.level} />
+                            ))}
+                        </div>
+                    </div>
+                )}
+                {projects.length > 0 && (
+                    <div className="cv-section">
+                        <div className="cv-section-title">Proyek</div>
+                        {projects.map(proj => (
+                            <div key={proj.id} className="cv-entry">
+                                <div className="cv-entry-header">
+                                    <span className="cv-entry-title">{proj.name}</span>
+                                    <span className="cv-entry-date">{proj.startDate}{proj.startDate && proj.endDate ? ' — ' : ''}{proj.endDate}</span>
+                                </div>
+                                {proj.role && <div className="cv-entry-subtitle">{proj.role}</div>}
+                                {proj.description && <div className="cv-entry-desc">{nl2br(proj.description)}</div>}
+                            </div>
+                        ))}
+                    </div>
+                )}
+                {certifications.length > 0 && (
+                    <div className="cv-section">
+                        <div className="cv-section-title">Sertifikat</div>
+                        {certifications.map(cert => (
+                            <div key={cert.id} className="cv-entry">
+                                <div className="cv-entry-header">
+                                    <span className="cv-entry-title">{cert.name}</span>
+                                    <span className="cv-entry-date">{cert.date}</span>
+                                </div>
+                                {cert.issuer && <div className="cv-entry-subtitle">{cert.issuer}</div>}
+                            </div>
+                        ))}
+                    </div>
+                )}
+                {languages.length > 0 && (
+                    <div className="cv-section">
+                        <div className="cv-section-title">Bahasa</div>
+                        <div className="cv-skills-grid">
+                            {languages.map(lang => (
+                                <div key={lang.id} className="cv-skill-item">
+                                    <span>{lang.name}</span>
+                                    <span className="cv-skill-level" style={{ fontSize: '0.7rem', color: 'var(--cv-text-muted)' }}>{lang.level}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+        </>
+    );
+}

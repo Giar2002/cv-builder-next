@@ -1,0 +1,73 @@
+'use client';
+
+import { useCVStore } from '@/store/useCVStore';
+import { Experience } from '@/types/cv';
+import { X, Plus } from 'lucide-react';
+
+function EntryCard({ exp, onUpdate, onRemove }: {
+    exp: Experience;
+    onUpdate: (data: Partial<Experience>) => void;
+    onRemove: () => void;
+}) {
+    return (
+        <div className="entry-card">
+            <div className="entry-header">
+                <span className="entry-number">{exp.title || 'Pengalaman Baru'}</span>
+                <button className="btn-remove" onClick={onRemove}><X size={14} /></button>
+            </div>
+            <div className="entry-fields">
+                <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                    <label>Posisi / Jabatan</label>
+                    <input type="text" placeholder="contoh: Software Engineer" value={exp.title}
+                        onChange={e => onUpdate({ title: e.target.value })} />
+                </div>
+                <div className="form-group">
+                    <label>Perusahaan</label>
+                    <input type="text" placeholder="PT Teknologi Indonesia" value={exp.company}
+                        onChange={e => onUpdate({ company: e.target.value })} />
+                </div>
+                <div className="form-group">
+                    <label>Mulai</label>
+                    <input type="text" placeholder="Jan 2022" value={exp.startDate}
+                        onChange={e => onUpdate({ startDate: e.target.value })} />
+                </div>
+                <div className="form-group">
+                    <label>Selesai</label>
+                    <input type="text" placeholder="Sekarang" value={exp.endDate}
+                        onChange={e => onUpdate({ endDate: e.target.value })} />
+                </div>
+                <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                    <label>Deskripsi</label>
+                    <textarea rows={3} placeholder="Jelaskan tanggung jawab dan pencapaian..." value={exp.description}
+                        onChange={e => onUpdate({ description: e.target.value })} />
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default function ExperienceTab() {
+    const experience = useCVStore(s => s.experience);
+    const addExperience = useCVStore(s => s.addExperience);
+    const updateExperience = useCVStore(s => s.updateExperience);
+    const removeExperience = useCVStore(s => s.removeExperience);
+
+    return (
+        <div>
+            <div className="section-header">
+                <h2>Pengalaman Kerja</h2>
+                <p className="section-desc">Tambahkan riwayat pekerjaan Anda</p>
+            </div>
+            <div className="entries-list">
+                {experience.map(exp => (
+                    <EntryCard key={exp.id} exp={exp}
+                        onUpdate={data => updateExperience(exp.id, data)}
+                        onRemove={() => removeExperience(exp.id)} />
+                ))}
+            </div>
+            <button className="btn-add" onClick={addExperience}>
+                <Plus size={16} /> Tambah Pengalaman
+            </button>
+        </div>
+    );
+}
