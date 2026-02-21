@@ -27,7 +27,7 @@ export default function LandingPage() {
         <div className="hero-content">
           <span className="hero-badge">✨ Versi 2.0 Kini Tersedia</span>
           <h1>Buat CV Profesional <span className="gradient-text">Dalam Hitungan Menit</span></h1>
-          <p className="hero-desc">Platform pembuat CV gratis dengan 7 template premium. Tanpa login, data tersimpan aman di browser Anda. Hasil export PDF siap kirim, lolos ATS.</p>
+          <p className="hero-desc">Platform pembuat CV gratis dengan 30+ template premium. Tanpa login, data tersimpan aman di browser Anda. Hasil export PDF siap kirim, lolos ATS.</p>
           <div className="hero-actions">
             <Link href="/builder" className="btn btn-lg btn-primary pulse-anim">
               Mulai Buat Sekarang
@@ -41,7 +41,7 @@ export default function LandingPage() {
           <div className="hero-stats">
             <div className="stat-item"><span className="stat-num">100%</span><span className="stat-label">Gratis</span></div>
             <div className="stat-divider" />
-            <div className="stat-item"><span className="stat-num">7</span><span className="stat-label">Template</span></div>
+            <div className="stat-item"><span className="stat-num">30+</span><span className="stat-label">Template</span></div>
             <div className="stat-divider" />
             <div className="stat-item"><span className="stat-num">ATS</span><span className="stat-label">Friendly</span></div>
           </div>
@@ -157,8 +157,8 @@ export default function LandingPage() {
                   <line x1="9" y1="21" x2="9" y2="9" />
                 </svg>
               </div>
-              <h3>7 Pilihan Template</h3>
-              <p>Dari gaya modern, eksekutif, hingga minimalis. Sesuaikan tampilan CV dengan industri dan kepribadian Anda untuk memukau HRD.</p>
+              <h3>30 Pilihan Template</h3>
+              <p>Dari gaya modern, profesional, ATS, hingga kreatif. Sesuaikan tampilan CV dengan industri dan kepribadian Anda untuk memukau HRD.</p>
             </div>
             <div className="feature-card">
               <div className="feature-icon icon-privacy">
@@ -237,7 +237,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="center-cta">
-            <Link href="/builder" className="btn btn-lg btn-outline">Lihat Semua 7 Template</Link>
+            <Link href="/builder" className="btn btn-lg btn-outline">Lihat Semua 30 Template</Link>
           </div>
         </div>
       </section>
