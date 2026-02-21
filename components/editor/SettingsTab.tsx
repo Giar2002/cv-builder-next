@@ -190,6 +190,124 @@ function ColorPicker() {
     );
 }
 
+// Helper to render distinct mini-previews based on template type
+function TemplateThumbnail({ tpl, isActive }: { tpl: TemplateConfig, isActive: boolean }) {
+    const baseColor = isActive ? '#6c63ff' : '#d0d0dc';
+    const darkColor = isActive ? '#3a3a5a' : '#d0d0dc';
+
+    if (tpl.id === 'modern' || tpl.category === 'general' && tpl.id !== 'classic' && tpl.id !== 'minimalist') {
+        return (
+            <div style={{ padding: '6px', height: '100%', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                <div className="tpl-mini-header">
+                    <div className="tpl-mini-photo" />
+                    <div className="tpl-mini-lines">
+                        <div className="tpl-mini-line w70" style={{ background: baseColor }} />
+                        <div className="tpl-mini-line w50" />
+                    </div>
+                </div>
+                <div className="tpl-mini-line w100" style={{ background: baseColor, height: '2px', margin: '2px 0' }} />
+                <div className="tpl-mini-section">
+                    <div className="tpl-mini-line w35" style={{ background: baseColor }} />
+                    <div className="tpl-mini-line w90" />
+                    <div className="tpl-mini-line w80" />
+                </div>
+            </div>
+        );
+    }
+
+    if (tpl.id === 'classic' || tpl.id === 'elegant' || tpl.category === 'professional') {
+        return (
+            <div style={{ padding: '6px', height: '100%', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                <div className="tpl-mini-center">
+                    <div className="tpl-mini-line w60" style={{ background: darkColor, height: '4px' }} />
+                    <div className="tpl-mini-line w40" />
+                    <div className="tpl-mini-line w50" />
+                </div>
+                <div className="tpl-mini-line w100 border-b" style={{ margin: '4px 0' }} />
+                <div className="tpl-mini-section">
+                    <div className="tpl-mini-line w25" style={{ background: darkColor }} />
+                    <div className="tpl-mini-line w95" />
+                    <div className="tpl-mini-line w85" />
+                </div>
+            </div>
+        );
+    }
+
+    if (tpl.category === 'creative' || tpl.category === 'layout' || tpl.id === 'creative') {
+        return (
+            <div style={{ display: 'flex', height: '100%', gap: '4px', padding: '2px' }}>
+                <div style={{ width: '35%', background: isActive ? '#2d3436' : '#e5e7eb', borderRadius: '4px', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '6px 2px', gap: '4px' }}>
+                    <div className="tpl-mini-photo small" style={{ background: isActive ? 'rgba(255,255,255,0.5)' : '#d0d0dc' }} />
+                    <div className="tpl-mini-line w80" style={{ background: isActive ? 'rgba(255,255,255,0.3)' : '#d0d0dc' }} />
+                    <div className="tpl-mini-line w60" style={{ background: isActive ? 'rgba(255,255,255,0.3)' : '#d0d0dc' }} />
+                </div>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3px', padding: '4px 0' }}>
+                    <div className="tpl-mini-line w80" style={{ background: darkColor, height: '5px' }} />
+                    <div className="tpl-mini-line w50" style={{ background: baseColor }} />
+                    <div className="tpl-mini-section" style={{ marginTop: '4px' }}>
+                        <div className="tpl-mini-line w90" />
+                        <div className="tpl-mini-line w80" />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (tpl.id === 'minimalist' || tpl.id === 'compact') {
+        return (
+            <div style={{ padding: '6px', height: '100%', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                <div className="tpl-mini-left">
+                    <div className="tpl-mini-line w70" style={{ background: darkColor, height: '5px' }} />
+                    <div className="tpl-mini-line w50" />
+                </div>
+                <div className="tpl-mini-spacer" />
+                <div className="tpl-mini-section">
+                    <div className="tpl-mini-line w30" style={{ background: baseColor }} />
+                    <div className="tpl-mini-line w90" />
+                    <div className="tpl-mini-line w85" />
+                </div>
+            </div>
+        );
+    }
+
+    if (tpl.category === 'ats') {
+        return (
+            <div style={{ padding: '6px', height: '100%', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                <div className="tpl-mini-left" style={{ alignItems: 'center' }}>
+                    <div className="tpl-mini-line w50" style={{ background: darkColor, height: '5px' }} />
+                    <div className="tpl-mini-line w30" />
+                </div>
+                <div className="tpl-mini-spacer" />
+                <div className="tpl-mini-section">
+                    <div className="tpl-mini-line w100 border-b" style={{ margin: '2px 0' }} />
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2px' }}>
+                        <div className="tpl-mini-line w40" style={{ background: darkColor }} />
+                        <div className="tpl-mini-line w25" />
+                    </div>
+                    <div className="tpl-mini-line w95" />
+                    <div className="tpl-mini-line w85" />
+                </div>
+            </div>
+        );
+    }
+
+    // Default Fallback
+    return (
+        <div style={{ padding: '6px', height: '100%', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+            <div className="tpl-mini-left">
+                <div className="tpl-mini-line w70" style={{ background: baseColor, height: '5px' }} />
+                <div className="tpl-mini-line w40" />
+            </div>
+            <div className="tpl-mini-line w100 border-b" style={{ margin: '4px 0' }} />
+            <div className="tpl-mini-section">
+                <div className="tpl-mini-line w30" style={{ background: darkColor }} />
+                <div className="tpl-mini-line w90" />
+                <div className="tpl-mini-line w80" />
+            </div>
+        </div>
+    );
+}
+
 export default function SettingsTab() {
     const settings = useCVStore(s => s.settings);
     const setSettings = useCVStore(s => s.setSettings);
@@ -288,15 +406,8 @@ export default function SettingsTab() {
                         <div key={tpl.id}
                             className={`template-card ${settings.template === tpl.id ? 'active' : ''}`}
                             onClick={() => setSettings({ template: tpl.id })}>
-                            <div className="template-preview" style={{ background: '#f8f9fa' }}>
-                                <div style={{ padding: '4px', height: '100%', display: 'flex', flexDirection: 'column', gap: '3px' }}>
-                                    <div style={{ height: '8px', background: settings.template === tpl.id ? '#6c63ff' : '#d1d5db', borderRadius: '2px', width: '70%' }} />
-                                    <div style={{ height: '5px', background: '#e5e7eb', borderRadius: '2px', width: '50%' }} />
-                                    <div style={{ height: '1px', background: '#d1d5db', margin: '2px 0' }} />
-                                    <div style={{ height: '4px', background: '#e5e7eb', borderRadius: '2px', width: '90%' }} />
-                                    <div style={{ height: '4px', background: '#e5e7eb', borderRadius: '2px', width: '80%' }} />
-                                    <div style={{ height: '4px', background: '#e5e7eb', borderRadius: '2px', width: '85%' }} />
-                                </div>
+                            <div className="template-preview" style={{ background: '#f8f9fa', padding: 0, overflow: 'hidden' }}>
+                                <TemplateThumbnail tpl={tpl} isActive={settings.template === tpl.id} />
                             </div>
                             <span className="template-name">{tpl.name}</span>
                             {tpl.badge && <span className={`template-badge ${tpl.category === 'ats' ? 'ats' : tpl.popular ? 'popular' : ''}`}>{tpl.badge}</span>}
